@@ -32,6 +32,10 @@ class DoublyLinkedList {
    * O(1).
    */
   pop(node) {
+    if (this._length === 0) {
+      return null;
+    }
+
     if (!node) {
       node = this._sentinel.next;
     }
@@ -46,6 +50,10 @@ class DoublyLinkedList {
    * O(1)
    */
   shift() {
+    if (this.length === 0) {
+      return null;
+    }
+
     const node = this._sentinel.prev;
     node.prev.next = this._sentinel;
     this._sentinel.prev = node.prev;
@@ -81,15 +89,20 @@ class DoublyLinkedList {
   }
 }
 
-const dll = new DoublyLinkedList();
-const fst = new Node(5);
-const snd = new Node(6);
-dll.push(fst);
-dll.push(snd);
-console.log(dll.pop() === fst); // true
-console.log(dll.pop() === snd); // true
-console.log(dll.length === 0); // true
-dll.push(snd);
-dll.unshift(fst);
-console.log(Array.from(dll));
-console.log(dll.shift() === fst); // true
+if (!module.parent) {
+  const dll = new DoublyLinkedList();
+  const fst = new Node(5);
+  const snd = new Node(6);
+  dll.pop();
+  dll.push(fst);
+  dll.push(snd);
+  console.log(dll.pop() === fst); // true
+  console.log(dll.pop() === snd); // true
+  console.log(dll.length === 0); // true
+  dll.push(snd);
+  dll.unshift(fst);
+  console.log(Array.from(dll));
+  console.log(dll.shift() === fst); // true
+}
+
+module.exports = { DoublyLinkedList, Node };

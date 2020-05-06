@@ -27,6 +27,10 @@ class LinkedList {
    * O(1)
    */
   unshift() {
+    if (this._length === 0) {
+      return null;
+    }
+
     const node = this._sentinel.next;
     this._sentinel.next = node.next;
     this._length--;
@@ -47,6 +51,7 @@ class LinkedList {
 }
 
 const ll = new LinkedList();
+ll.unshift();
 ll.shift(new Node(5));
 ll.shift(new Node(4));
 ll.shift(new Node(3));
